@@ -12,7 +12,19 @@ PACKAGE_VERSION = $$(git --git-dir=upstream/.git describe --tags | sed 's/curl-/
 PATCH_VERSION = $$(cat version)
 VERSION = $(PACKAGE_VERSION)-$(PATCH_VERSION)
 
-.PHONY : default submodule manual container build version push local
+ZLIB_VERSION = 1.2.8-1
+ZLIB_URL = https://github.com/amylum/zlib/releases/download/$(ZLIB_VERSION)/zlib.tar.gz
+ZLIB_TAR = zlib.tar.gz
+ZLIB_DIR = /tmp/zlib
+ZLIB_PATH = --with-zlib=$(ZLIB_DIR)/usr
+
+SSL_VERSION = 1.0.2d-1
+SSL_URL = https://github.com/amylum/openssl/releases/download/$(SSL_VERSION)/openssl.tar.gz
+SSL_TAR = /tmp/ssl.tar.gz
+SSL_DIR = /tmp/ssl
+SSL_PATH = --with-ssl=$(SSL_DIR)/usr
+
+.PHONY : default submodule deps manual container build version push local
 
 default: submodule container
 
@@ -25,11 +37,21 @@ manual: submodule
 container:
 	./meta/launch
 
-build: submodule
+deps:
+	rm -rf $(SSL_DIR) $(SSL_TAR)
+	mkdir $(SSL_DIR)
+	curl -sLo $(SSL_TAR) $(SSL_URL)
+	tar -x -C $(SSL_DIR) -f $(SSL_TAR)
+	rm -rf $(ZLIB_DIR) $(ZLIB_TAR)
+	mkdir $(ZLIB_DIR)
+	curl -sLo $(ZLIB_TAR) $(ZLIB_URL)
+	tar -x -C $(ZLIB_DIR) -f $(ZLIB_TAR)
+
+build: submodule deps
 	rm -rf $(BUILD_DIR)
 	cp -R upstream $(BUILD_DIR)
 	cd $(BUILD_DIR) && autoreconf -i
-	cd $(BUILD_DIR) && CC=musl-gcc CFLAGS='$(CFLAGS)' ./configure $(PATH_FLAGS) $(CONF_FLAGS)
+	cd $(BUILD_DIR) && CC=musl-gcc CFLAGS='$(CFLAGS)' ./configure $(PATH_FLAGS) $(CONF_FLAGS) $(SSL_PATH) $(ZLIB_PATH)
 	cd $(BUILD_DIR) && make DESTDIR=$(RELEASE_DIR) install
 	mkdir -p $(RELEASE_DIR)/usr/share/licenses/$(PACKAGE)
 	cp $(BUILD_DIR)/COPYING $(RELEASE_DIR)/usr/share/licenses/$(PACKAGE)/LICENSE
