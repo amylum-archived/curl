@@ -22,7 +22,7 @@ SSL_VERSION = 1.0.2d-1
 SSL_URL = https://github.com/amylum/openssl/releases/download/$(SSL_VERSION)/openssl.tar.gz
 SSL_TAR = /tmp/ssl.tar.gz
 SSL_DIR = /tmp/ssl
-SSL_PATH = --with-ssl=$(SSL_DIR)/usr
+SSL_FLAGS = -I$(SSL_DIR)/usr/include -L$(SSL_DIR)/usr/lib
 
 .PHONY : default submodule deps manual container build version push local
 
@@ -51,7 +51,7 @@ build: submodule deps
 	rm -rf $(BUILD_DIR)
 	cp -R upstream $(BUILD_DIR)
 	cd $(BUILD_DIR) && autoreconf -i
-	cd $(BUILD_DIR) && CC=musl-gcc CFLAGS='$(CFLAGS)' ./configure $(PATH_FLAGS) $(CONF_FLAGS) $(SSL_PATH) $(ZLIB_PATH)
+	cd $(BUILD_DIR) && CC=musl-gcc CFLAGS='$(CFLAGS) $(SSL_FLAGS)' ./configure $(PATH_FLAGS) $(CONF_FLAGS) $(ZLIB_PATH)
 	cd $(BUILD_DIR) && make DESTDIR=$(RELEASE_DIR) install
 	mkdir -p $(RELEASE_DIR)/usr/share/licenses/$(PACKAGE)
 	cp $(BUILD_DIR)/COPYING $(RELEASE_DIR)/usr/share/licenses/$(PACKAGE)/LICENSE
