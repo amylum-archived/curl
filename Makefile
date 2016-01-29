@@ -12,13 +12,13 @@ PACKAGE_VERSION = $$(git --git-dir=upstream/.git describe --tags | sed 's/curl-/
 PATCH_VERSION = $$(cat version)
 VERSION = $(PACKAGE_VERSION)-$(PATCH_VERSION)
 
-ZLIB_VERSION = 1.2.8-1
+ZLIB_VERSION = 1.2.8-2
 ZLIB_URL = https://github.com/amylum/zlib/releases/download/$(ZLIB_VERSION)/zlib.tar.gz
 ZLIB_TAR = zlib.tar.gz
 ZLIB_DIR = /tmp/zlib
 ZLIB_PATH = --with-zlib=$(ZLIB_DIR)/usr
 
-OPENSSL_VERSION = 1.0.2f-3
+OPENSSL_VERSION = 1.0.2f-5
 OPENSSL_URL = https://github.com/amylum/openssl/releases/download/$(OPENSSL_VERSION)/openssl.tar.gz
 OPENSSL_TAR = /tmp/ssl.tar.gz
 OPENSSL_DIR = /tmp/ssl
