@@ -6,19 +6,19 @@ RELEASE_DIR = /tmp/$(PACKAGE)-release
 RELEASE_FILE = /tmp/$(PACKAGE).tar.gz
 PATH_FLAGS = --prefix=/usr --mandir=/usr/share/man
 CONF_FLAGS = --enable-ipv6
-CFLAGS = -static -static-libgcc -Wl,-static -lc
+CFLAGS =
 
 PACKAGE_VERSION = $$(git --git-dir=upstream/.git describe --tags | sed 's/curl-//;s/_/./g')
 PATCH_VERSION = $$(cat version)
 VERSION = $(PACKAGE_VERSION)-$(PATCH_VERSION)
 
-ZLIB_VERSION = 1.2.8-2
+ZLIB_VERSION = 1.2.8-4
 ZLIB_URL = https://github.com/amylum/zlib/releases/download/$(ZLIB_VERSION)/zlib.tar.gz
 ZLIB_TAR = zlib.tar.gz
 ZLIB_DIR = /tmp/zlib
 ZLIB_PATH = --with-zlib=$(ZLIB_DIR)/usr
 
-OPENSSL_VERSION = 1.0.2g-6
+OPENSSL_VERSION = 1.0.2h-7
 OPENSSL_URL = https://github.com/amylum/openssl/releases/download/$(OPENSSL_VERSION)/openssl.tar.gz
 OPENSSL_TAR = /tmp/ssl.tar.gz
 OPENSSL_DIR = /tmp/ssl
