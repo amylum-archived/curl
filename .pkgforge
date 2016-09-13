@@ -5,9 +5,7 @@ licenses 'COPYING'
 
 deps(
   zlib: '1.2.8-4',
-  openssl: '1.0.2h-7',
-  krb5: '1.14.3-6',
-  libidn: '1.33-2'
+  openssl: '1.0.2h-7'
 )
 
 configure_flags(
@@ -15,8 +13,6 @@ configure_flags(
   mandir: '/usr/share/man',
   'enable-ipv6': nil,
   'enable-threaded-resolver': nil,
-  'with-gssapi': nil,
-  'with-libidn': nil,
   'with-random': '/dev/urandom',
   'with-ca-bundle': '/etc/ssl/certs/ca-certificates.crt'
 )
