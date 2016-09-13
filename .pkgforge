@@ -5,7 +5,9 @@ licenses 'COPYING'
 
 deps(
   zlib: '1.2.8-4',
-  openssl: '1.0.2h-7'
+  openssl: '1.0.2h-7',
+  krb5: '1.14.3-6',
+  libidn: '1.33-2'
 )
 
 configure_flags(
@@ -30,6 +32,5 @@ build do
 end
 
 test do
-  run 'ssh -V'
-  run 'ssh-keygen -f /tmp/fakekey -N ""'
+  run 'curl -V'
 end
