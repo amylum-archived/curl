@@ -1,7 +1,7 @@
 curl
 ==========
 
-[![Build Status](https://img.shields.io/circleci/project/amylum/curl.svg)](https://circleci.com/gh/amylum/curl)
+[![Build Status](https://img.shields.io/circleci/project/amylum/curl/master.svg)](https://circleci.com/gh/amylum/curl)
 [![GitHub release](https://img.shields.io/github/release/amylum/curl.svg)](https://github.com/amylum/curl/releases)
 [![MIT Licensed](https://img.shields.io/badge/license-MIT-green.svg)](https://tldrlegal.com/license/mit-license)
 
