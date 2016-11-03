@@ -13,7 +13,6 @@ configure_flags(
   mandir: '/usr/share/man',
   'enable-ipv6': nil,
   'enable-threaded-resolver': nil,
-  'with-random': '/dev/urandom',
   'with-ca-bundle': '/etc/ssl/certs/ca-certificates.crt'
 )
 
@@ -21,7 +20,7 @@ cflags
 harden
 
 build do
-  run 'autoreconf -i'
+  run './buildconf'
   configure
   make
   install
