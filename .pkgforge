@@ -4,8 +4,8 @@ org 'amylum'
 licenses 'COPYING'
 
 deps(
-  zlib: '1.2.9-1',
-  openssl: '1.0.2j-2'
+  zlib: '1.2.10-1',
+  openssl: '1.0.2j-3'
 )
 
 configure_flags(
