@@ -4,8 +4,14 @@ org 'amylum'
 licenses 'COPYING'
 
 deps(
-  zlib: '1.2.11-1',
-  openssl: '1.0.2k-1'
+  zlib: {
+    version: '1.2.11-1',
+    checksum: '5596e2d39ef98e2323ac415f50afa71a433ed65c23e8d1f2723f711f5ffb4f32'
+  },
+  openssl: {
+    version: '1.0.2k-1',
+    checksum: '89b14acdf3ef9134cfbbcd88fc5bf6f3a44ed28a05c1668dffb14ee0a83b7d21'
+  }
 )
 
 configure_flags(
